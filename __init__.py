@@ -3,16 +3,14 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from os.path import dirname
-from subprocess import DEVNULL, STDOUT, check_call
+#from subprocess import DEVNULL, STDOUT, check_call
+from subprocess import DEVNULL, STDOUT, Popen
 from adapt.intent import IntentBuilder
 from bs4 import BeautifulSoup
 
 from mycroft.skills.core import MycroftSkill
 
-try:
-    from mycroft.device import device as d_hw
-except ImportError:
-    d_hw = 'desktop'
+d_hw = 'pi'
 
 
 class AVmusicSkill(MycroftSkill):
@@ -71,9 +69,10 @@ class AVmusicSkill(MycroftSkill):
     def handle_playnow_intent(self, message):
         try:
             if d_hw == 'pi':
-                self.process = check_call(["mpv", "--vid=no", self.vid], stdout=DEVNULL, stderr=STDOUT)
+                self.process = Popen(["mpv", "--vid=no", self.vid], stdout=DEVNULL, stderr=STDOUT)
             else:
-                self.process = check_call(["mpv", self.vid], stdout=DEVNULL, stderr=STDOUT)
+                pass
+                #self.process = check_call(["mpv", self.vid], stdout=DEVNULL, stderr=STDOUT)
             # self.enable_intent('pause_intent')
             self.speak_dialog('SayStop')
 
