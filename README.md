@@ -29,7 +29,7 @@ or -
 
 ## Examples
 * "play some imagine dragons music"
-* "av play study music playlist"
+* "youtube play study music playlist"
 
 ## Important install notes
 Please note that the recommended way to install required mpv package for Ubuntu is via PPAs. 
